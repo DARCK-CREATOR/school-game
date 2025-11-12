@@ -97,6 +97,7 @@
     <p id="score">
       Points : {{ score.score }}
       
+      
     </p>
     <br>
   </div>
@@ -159,7 +160,7 @@
 
     let questionElement = document.getElementById("quiz");
 
-    let score = {{ score.score }};
+    let score = {{ score.score|default:0 }};
     scoreElement.innerText = "Score : " + score;
     function cache() {
     setTimeout(function () {
