@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+        <style>
+       
+            .choix{
+      flex: 1;
+      background: #bfffff;
+      padding: 2rem;
+      border-radius: 12px;
+      color: #0b112c;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+            .main {
+      flex: 2;
+      background: #aaf4ff;
+      color: #100d27;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+             .container {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+    }
+            body {
+                background-color: #fff;
+                color: #f0f0f0;
+               
+                font-family: Georgia, ;
+                animation-name : hey;
+                animation-duration: 3s;
+              
+                
+            }
+            @keyframes hey{
+                from{
+                  transform: translateY(100px);
+                 opacity: 0;
+                }
+                to {
+                  transform: translateY(0);
+                  opacity: 1;
+                }
+            }
+            header{
+                background: linear-gradient(90deg, #d5dfff , #2bc0ff);
+                padding: 2rem;
+                
+            }
+            nav {
+                text-align: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.6)
+            }
+            header h1{
+                font-size: 2.5rem;
+                text-shadow: 0 0 5px blue,
+                0 0 6px blue;
+                text-align: center;
+              
+            }
+            nav{
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex: 1;
+                padding: 2rem;
+                background: #2bc0ff;
+            }
+            
+            nav a {
+      color: blue; 
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+      font-size: 18px;
+      font-family: Georgia, serif;
+      animation: rainbow 3s linear infinite;
+      text-shadow: 
+      0 0 5px blue,
+      0 0 8px white;
+      ;
+    }
+    nav a:hover {
+      color: #50fa7b;
+    }
+    
+    @keyframes rainbow{
+        10% {color : #270718;}
+        30% {color : #502699;}
+        50% {color : #338099;}
+        80% {color : #1c15ff;}
+        85% {color : gold ;}
+        88% {color : #55ff82;}
+        90% {color : #eaffbf;}
+        100% {color : #15cbff;}
+    }
+    footer {
+      background: #2bffff;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+@media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }    
+      h1 {
+          text-align: center;
+          letter-spacing: 1px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    p {
+      font-family: Courier new, monospace;
+      
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+        </style>
+        <title>welcome to school game </title>
+    </head>
+    <body>
+        <header>
+            <h1 class="h1">SCHOOL GAME</h1>
+        </header>
+        
+        
+        
+        <nav>
+            
+            <a href="{% url 'inscription' %}">Inscription</a>
+            <a href="projet.html">Projet</a>
+            <a href="Apropos.html">À propos</a>
+        </nav>
+        
+        <div class="container">
+        <div class="main">
+            <h1>SCHOOL GAME</h1>
+            <p>🚀 Bienvenue sur mon mini-projet !</p>
+            <p>🧠💡 Défie ton cerveau et ta culture générale ! 🏆✏️ Trouve les bonnes réponses et marque un maximum de points pour devenir le champion incontesté du jeu ! 🎯🥇</p>
+</div>
+<div class="choix">
+    <h1>🚀 OBJECTIF</h1>
+<p>👥 Inscris-toi</p>
+<p>💪 Progresse</p>
+<p>🏆 Améliore ton score</p>
+<p>📋 Rejoins la liste des joueurs actifs !</p>
+</div>
+            
+        </div>
+        
+        <footer>
+            &copy; 2025 made by <span>school game</span>
+        </footer>
+    </body>
+</html>
