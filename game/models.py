@@ -10,8 +10,9 @@ class Inscription(models.Model):
         return self.nom
 
 class Score(models.Model):
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)
     joueur = models.ForeignKey(Inscription,on_delete=models.CASCADE,default=1)
     def __str__(self):
         return str(self.score)
+
 
