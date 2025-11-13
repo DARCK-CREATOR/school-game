@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&z=thx$=cbtk+&9^kq%!o0n2d@wxiq@csjjwwap)$z%77%=wbr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -69,7 +69,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'school.wsgi.application'
 
-
+import os
+port = os.environ.get('PORT', '8000')
+os.system(f"python manage.py runserver 0.0.0.0:{port}")
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -80,6 +82,10 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
