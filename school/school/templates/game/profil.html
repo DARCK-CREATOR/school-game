@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport"
+  content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="icon" href="https://i.imgur.com/scZ6zqc.jpeg">
+  <title>profil account</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+body {
+    font-family: Georgia, serif;
+    
+   background-image: linear-gradient(to left, #ffffff,#15ffe0,#ffd5df,#6a8dff)
+   }
+   .header{
+       background-image: linear-gradient(90deg, #2bc0ff,#d5f4ff);
+ padding: 8px;
+ border-radius: 10px 10px;
+ border: 1px solid #6a78ff;
+ margin-bottom: 1em;
+ box-shadow: 0 4px 8px rgba(0,0,0,0.8);
+ animation-name: couleur;
+ animation-duration: 3s;
+ position: relative;
+ text-align: center;
+   }
+   .container {
+    justify-content: center;
+    text-align: center;
+  } 
+   div {
+       background-image: linear-gradient(90deg, #2beaff,#6afff5);
+       border-radius: 8px 8px;
+       padding: 8px;
+       border: 1px solid #55c1ff;
+       margin-bottom: 1rem;
+       box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+       animation-name: couleur;
+       animation-duration: 3s;
+   }
+   button {
+       padding: 10px;
+       text-align:  center;
+       background-image: linear-gradient(to right, #55eaff, #6a8dff,#ffffff);
+       border: 1px solid #55eaff;
+       border-radius: 18px 18px;
+       box-shadow: 3px 6px 8px rgba(0,0,0,0.8);
+     width: 50%;
+     margin-bottom: 8em;
+   }
+   button:hover {
+     background-image: linear-gradient(90deg,#625fd3,#44e243,#acaadc,#cbcaec,#d7d6e1,#cd9039,#e96291);
+   }
+   div h1 {
+       font-size: 18px;
+       text-align: center;
+       color: white;
+       text-shadow: 
+       0 0 5px white,
+       0 0 10px white
+       ;
+   } 
+   li {
+       font-size: 1.2rem;
+       font-family: Georgia, serif;
+       color: white;
+       text-shadow: 0 0 10px rgba(0,0,0,0.3);
+       text-align: center;
+       list-style-type: none;
+       font-family: Monospace,Sans-serif;
+   }
+  
+   .photo {
+       width: 180px;
+       height: 180px;
+       border-radius: 50%;
+       border: 1px solid #55c1ff;
+       margin-bottom: 1rem;
+       box-shadow: 0 4px 8px #3831e0,
+       0 5px 10px white;
+       animation: photo 2s ease-in-out;
+       overflow: hidden;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       text-align: center;
+   }
+  .photo:hover{
+     animation: photo1 2s ease-in-out;
+   }
+   @keyframes photo1{
+     from{
+           transform: rotateY(400deg);
+     }
+     to{
+       transform: rotateY(0);
+     }
+   }
+    img {
+     object-fit: cover;
+     width: 100%;
+     height: 100%;
+     border-radius: 50%;
+     display: block;
+     
+   }
+@keyframes couleur{
+    from{
+        opacity: 0;
+        transform: translate(80px);
+    }
+    to{
+        transform: translate(0);
+        opacity: 0.9;
+    }  
+}
+        .objectif {
+          font-size: 14px;
+          color: blue;
+          text-shadow:
+          0 4px 8px blue,
+          0 5px 10px blue
+          ;
+          animation: para 5s linear infinite;
+          font-family: Courier New, monospace;
+          
+          position: absolute;
+          pointer-events: none;
+      
+        }
+      @keyframes para {
+        from{
+          transform: translate(300px);
+        }
+        to {
+          transform: translate(-350px);
+        }
+      }
+      .perso{
+        font-size: 1.5rem;
+        color: white;
+
+      }
+      
+  </style>
+</head>
+<body>
+ <main class="container">
+  <center>
+   <header class="photo">
+    <img id="img" src="{{ perso.image.url }}" class="img">
+    
+    </header>
+  </center>
+    
+   <header class="header">
+        
+       
+  <h1 class="rainbow-animate perso" id="profile">{{ perso.nom }} <i class="fa-solid fa-user"></i></h1>
+  </header>
+  <div>
+          <h1>LISTE DES JOUEURS</h1>
+     <ul id="liste">
+       {% for personne in personnes %}
+       <li> {{ personne.nom }} </li> 
+       {% empty %}
+       <li> Aucun utilisateurs trouver </li>
+       {% endfor %}
+     </ul>
+      <p style="text-align: center;" id="Score">SCORE : 0</p>
+      <p id="time" style="font-size: 13px;"></p>
+     </div>
+ 
+  <button  class="rainbow-animate" onclick="suivant()">NIVEAU</button>
+ </main>
+  
+  
+ <p class="objectif" id="objectif">💪 Progresse ,apprends et🏆 Améliore ton score ! </p>
+
+  
+  <script>
+      function suivant() {
+      window.location.href="/niveau/"
+      }
+      
+
+let scoreTotal = 0;
+
+for (let i = 1; i <= 20; i++) {
+    let scoreNiveau = parseInt(localStorage.getItem("scoreNiveau" + i)) || 0;
+    scoreTotal += scoreNiveau;
+}
+document.getElementById("Score").textContent = "SCORE : " + scoreTotal + " PTS 🎉";
+ setInterval(() => {
+let temps = document.getElementById("time")
+temps.textContent=`Le : ${new Date().toLocaleString()}`
+ },1000)
+
+  </script>
+</body>
+</html>

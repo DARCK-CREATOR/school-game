@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width,initial-scale=1.0">
+  <title>Débutant 20</title>
+  <style>
+    body{
+    font-family: Georgia, serif;
+    text-align: center;
+    background-color: #48deed;
+
+    }
+    button {
+    background-color: blue;
+    border-radius: 20px 20px;
+    padding: 15px;
+    border: 1px solid cyan;
+    width: 70%;
+    margin-bottom: 1em;
+    color: white;
+    font-family: Georgia, serif;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.8);
+    }
+
+
+    div {
+    border-radius: 10px 10px;
+
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    animation-duration: 3s;
+    animation-name: junior;
+    }
+    @keyframes junior{
+    from{
+    transform: rotateX(380deg);
+    opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+    }
+
+    h1 {
+    font-size: 22px;
+    padding: 8px;
+    color: black;
+    }
+    p {
+    color: black;
+    }
+    dialog{
+
+    border-radius: 10px 10px;
+    background: #b7fafa;
+    border: none;
+    width: 60%;
+    }
+
+    .dialog::backdrop {
+    background: rgba(0,0,0,0.3);
+    }
+    .dialog p {
+    white-space: pre-line;
+    color: blue;
+    }
+    .dialog button {
+    width: 100%;
+    }
+    .dialog h1 {
+    font-size: 30px;
+    color: black;
+    }
+    .text {
+    width: 50%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="reponses">
+    <br><br><br>
+    <h1 id="quiz"></h1>
+    <br><br><br>
+
+    <button id="btn0" onclick="reponse(0)"></button>
+    <button id="btn1" onclick="reponse(1)"></button>
+    <button id="btn2" onclick="reponse(2)"></button>
+    <button id="btn3" onclick="reponse(3)"></button>
+    <p id="score">
+      Points : 0
+    </p>
+    <br>
+    
+  </div>
+
+  <dialog class="dialog" id="dialog">
+    <h1 class="dialog-h1">VICTOIRE  🎉</h1>
+    <button onclick="suivant({{ joueur_id }})">SUIVANT</button>
+    <button onclick="profil({{ joueur_id }})">PROFIL</button>
+  </dialog>
+  <dialog class="text" id="text">
+
+  </dialog>
+  <script>
+
+    let dialog = document.getElementById("dialog")
+    let text = document.getElementById("text")
+    setTimeout(function () {
+    text.innerHTML = `<p>BIENVENUE AU \n NIVEAU 20</p>`
+    text.showModal()
+    }, 2500)
+    setTimeout(function () {
+    text.close()
+    }, 4000)
+  function cache() {
+    setTimeout(function () {
+    text.close();
+    }, 1000)
+    }
+    function suivant(id) {
+    window.location.href = `/debutant21/${id}/`
+    }
+    function profil(id) {
+    window.location.href = `/profil/${id}/`
+    
+    }
+    let questionTableau = [
+    {
+    "questions": "Quel est l’organe qui filtre le sang ?",
+    "result": ["Foie", "Cœur", "Rein", "Poumons"],
+    "correction": 0
+    },
+    {
+    "questions": "Quel est le plus long fleuve du monde ?",
+    "result": ["Nil", "Amazone", "Yangtsé", "Mississippi"],
+    "correction": 3
+    },
+    {
+    "questions": "Combien y a-t-il de secondes dans une heure ?",
+    "result": ["3 600", "3 000", "60 000", "6 000"],
+    "correction": 1
+    },
+    {
+    "questions": "Quel est l’animal terrestre le plus rapide ?",
+    "result": ["Guépard", "Lion", "Tigre", "Léopard"],
+    "correction": 2
+    },
+    {
+    "questions": "Quel est l’élément chimique dont le symbole est Fe ?",
+    "result": ["Fer", "Fluor", "Phosphore", "Francium"],
+    "correction": 0
+    },
+    {
+    "questions": "Quel pays est surnommé 'le pays du Soleil-Levant' ?",
+    "result": ["Chine", "Corée", "Japon", "Thaïlande"],
+    "correction": 3
+    },
+    {
+    "questions": "Combien y a-t-il de jours dans une année bissextile ?",
+    "result": ["365", "366", "364", "368"],
+    "correction": 1
+    },
+    {
+    "questions": "Quel scientifique a proposé la loi de la gravitation universelle ?",
+    "result": ["Einstein", "Galilée", "Newton", "Kepler"],
+    "correction": 2
+    },
+    {
+    "questions": "Quelle est la capitale de l’Espagne ?",
+    "result": ["Barcelone", "Madrid", "Valence", "Séville"],
+    "correction": 0
+    },
+    {
+    "questions": "Quel est le plus grand océan du monde ?",
+    "result": ["Atlantique", "Indien", "Pacifique", "Arctique"],
+    "correction": 3
+    }
+    ]
+
+
+    let debutPremiereQuestion = 0;
+    let questionPoser = [];
+
+    let divElement = document.getElementById("reponses");
+
+    let scoreElement = document.getElementById("score");
+
+    let questionElement = document.getElementById("quiz");
+    let score = {{ score.score }}
+    const joueur_id = {{ joueur_id }}
+    scoreElement.innerText = "Score : " + score;
+    let reponseButton = [
+    document.getElementById("btn0"),
+    document.getElementById("btn1"),
+    document.getElementById("btn2"),
+    document.getElementById("btn3"),
+    ];
+
+
+    function nouvelleQuestion() {
+
+    if (questionPoser.length === questionTableau.length) {
+    let i = 0;
+    i++
+    text.innerHTML= `<p> Felicitations💐 niveau 20 terminer score: ${score}</p>`
+    text.showModal()
+   
+    divElement.innerHTML = "";
+
+    setTimeout(function () {
+    text.innerHTML = "Félicitation niveau suivant ! 💐"
+    text.showModal();
+    dialog.showModal()
+    }, 100)
+    return;
+    }
+
+    let questionIndex = getRandomQuestionIndex();
+    debutPremiereQuestion = questionIndex;
+    let questionData = questionTableau[debutPremiereQuestion]
+    questionElement.innerText = questionData.questions;
+
+
+
+    for (let i = 0; i < reponseButton.length; i++ ){
+
+    reponseButton[i].innerText = i+ ": " + questionData.result[i] || "";
+    }
+    }
+
+    function getRandomQuestionIndex() {
+
+    let questionIndex = Math.floor(Math.random()* questionTableau.length);
+
+    while (questionPoser.includes(questionIndex)) {
+    questionIndex = Math.floor(Math.random()* questionTableau.length)
+
+    }
+    questionPoser.push(questionIndex)
+    return questionIndex;
+    }
+
+
+    function reponse(reponseIndex) {
+    let questionData = questionTableau[debutPremiereQuestion];
+    if (reponseIndex === questionData.correction ) {
+    score++
+    function getcookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+  }
+                    fetch('/Save_Score/',{
+         method : "POST",
+         headers: {
+            'Content-Type':'application/json',
+            'X-csrfToken': getcookie('csrftoken')
+            },
+         body : JSON.stringify({
+            value : score,
+            joueur: joueur_id
+            })
+         })
+         .then(res => res.json())
+         .then(data => console.log("Reussie"))
+  text.innerHTML = `<p>
+    Vous avez trouver félicitations !\n \n la réponse était  <strong>
+    ${questionData.result[questionData.correction]}
+    </strong>
+    </p>`
+    text.showModal()
+    cache()
+    scoreElement.innerHTML="Score: "+ score;
+    nouvelleQuestion();
+
+    }else {
+    text.innerHTML=`<p>votre réponse est incorrect ! </p>`;
+    text.showModal()
+    cache()
+    score--
+    scoreElement.innerHTML="Score : "+ score;
+  
+    }
+    }
+
+    function recommencer() {
+    debutPremiereQuestion = 0;
+    score= 0;
+    questionPoser = [];
+    scoreElement.innerHTML= "Score: "+ score;
+
+    nouvelleQuestion();
+    }
+    nouvelleQuestion();
+
+  </script>
+
+</body>
+</html>

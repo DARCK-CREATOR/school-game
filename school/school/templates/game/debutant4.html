@@ -1,0 +1,299 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width,initial-scale=1.0">
+        <title>Débutant 4</title>
+        <style>
+        body{
+            font-family: Georgia, serif;
+            text-align: center;
+            background-color: #d5f6ff;
+       
+        }
+        button {
+            background-color: #faff2a;
+            border-radius: 20px 20px;
+            padding: 15px;
+            border: 1px solid cyan;
+            width: 70%;
+            margin-bottom: 1em;
+            color: black;
+            font-family: Georgia, serif; 
+            box-shadow: 0 2px 2px rgba(0,0,0,0.8);
+        }
+       
+
+        div {
+            border-radius: 10px 10px;
+          
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            animation-duration: 3s;
+            animation-name: junior;
+        }
+        @keyframes junior{
+            from{ 
+                background: black;
+                transform: translateY(80px);
+            }
+            to {
+                background-color: white;
+                transform: translateY(0px);
+                
+            }
+        }
+     
+     h1 {
+         font-size: 22px;
+         padding: 8px;
+         color: black;
+     }
+     p {
+         color: black;
+     }
+     dialog{
+       
+       border-radius: 10px 10px;
+       background: #b7fafa;
+       border: none;
+       width: 60%;
+     }
+     
+     .dialog::backdrop {
+       background: rgba(0,0,0,0.3);
+     }
+     .dialog p {
+       white-space: pre-line;
+       color: blue;
+     }
+     .dialog button {
+       width: 100%;
+     }
+     .dialog h1 {
+       font-size: 30px;
+       color: ;
+     }
+     .text {
+       width: 50%;
+     }
+   
+     
+             </style>
+    </head>
+    <body>
+    
+        <div id="reponses">
+            <br><br><br>
+          <h1 id="quiz">qui es-tu ?</h1> 
+            <br><br><br>
+          
+        <button id="btn0" onclick="reponse(0)"></button>
+        <button id="btn1" onclick="reponse(1)"></button>
+        <button id="btn2" onclick="reponse(2)"></button>
+        <button  id="btn3" onclick="reponse(3)"></button>
+         <p id="score">Points : 0</p>
+         <br>
+       </div>
+        
+        
+        
+        
+     <dialog class="dialog" id="dialog">
+          <h1 class="dialog-h1">VICTOIRE  🎉</h1>
+          <button onclick="suivant()">SUIVANT</button>
+          <button onclick="profil()">PROFIL</button>
+        </dialog>
+        <dialog class="text" id="text">
+          
+        </dialog>
+
+        <script>
+            
+         
+         let dialog= document.getElementById("dialog")
+          let text= document.getElementById("text")
+            setTimeout(function () {
+              text.innerHTML=`<p>BIENVENUE AU \n NIVEAU 4</p>`
+              text.showModal()
+            },2500)
+            setTimeout(function () {
+              text.close()
+            },4000)
+            
+            let questionTableau =[
+  {
+    questions: "Quel mot est un synonyme de 'intelligent' ?",
+    result: ["Stupide", "Malin", "Fatigué", "Silencieux"],
+    correction: 1
+  },
+  {
+    questions: "Si tu doubles le nombre 6, quel est le résultat ?",
+    result: ["8", "10", "12", "14"],
+    correction: 2
+  },
+  {
+    questions: "Quel objet mesure le temps ?",
+    result: ["Thermomètre", "Horloge", "Balance", "Télémètre"],
+    correction: 1
+  },
+  {
+    questions: "Lequel de ces pays n’est pas en Afrique ?",
+    result: ["Kenya", "Nigeria", "Brésil", "Maroc"],
+    correction: 2
+  },
+  {
+    questions: "Combien de consonnes dans le mot 'classe' ?",
+    result: ["2", "3", "4", "5"],
+    correction: 2
+  },
+  {
+    questions: "Si une pizza est coupée en 8 parts et tu en manges 3, combien reste-t-il ?",
+    result: ["3", "4", "5", "6"],
+    correction: 2
+  },
+  {
+    questions: "Quelle unité mesure la température ?",
+    result: ["Litre", "Mètre", "Celsius", "Watt"],
+    correction: 2
+  },
+  {
+    questions: "Quel est le féminin de 'acteur' ?",
+    result: ["Acteuse", "Actrice", "Actie", "Actaire"],
+    correction: 1
+  },
+  {
+    questions: "Quel est le résultat de 15 divisé par 3 ?",
+    result: ["3", "5", "6", "4"],
+    correction: 1
+  },
+  {
+    questions: "Quel mot est mal orthographié ?",
+    result: ["Chapeau", "Fenaitre", "Bateau", "Soleil"],
+    correction: 1
+  }
+]
+
+function cache() {
+   setTimeout(function () {
+     text.close();
+   },1000)
+}
+  function suivant() {
+    window.location.href="/debutant5/"
+  }
+  function profil() {
+    window.location.href="/profil/"
+    
+  } 
+            
+             let debutPremiereQuestion = 0;
+  let questionPoser= [];
+                  
+let divElement = document.getElementById("reponses");
+            
+let scoreElement = document.getElementById("score");
+            
+let questionElement = document.getElementById("quiz");
+  let score = parseInt(localStorage.getItem("scoreNiveau4")) || 0; 
+scoreElement.innerText = "Score : " + score;                   
+            let reponseButton =  [
+                document.getElementById("btn0"),
+                document.getElementById("btn1"),
+                document.getElementById("btn2"),
+                document.getElementById("btn3"),
+            ];
+            
+                        
+            function nouvelleQuestion() {
+                
+            if(questionPoser.length === questionTableau.length) {
+            let i = 0 ;
+            i++
+             text.innerHTML=`<p>Félicitation niveau  4 terminé ! \n score final : ${score}</p>`
+             text.showModal();
+     localStorage.setItem("scoreNiveau4",score)
+            divElement.innerHTML= "";
+            
+                setTimeout(function () {
+            text.innerHTML="Félicitation niveau suivant ! 💐"
+            text.showModal();
+                dialog.showModal()
+            }
+,100)
+                return;
+            }
+            
+            let questionIndex= getRandomQuestionIndex();
+            debutPremiereQuestion = questionIndex;
+            let questionData = questionTableau[debutPremiereQuestion]
+            questionElement.innerText = questionData.questions;
+            
+           
+            
+ for(let i = 0; i< reponseButton.length; i++ ){
+             
+              reponseButton[i].innerText= i+ ": " + questionData.result[i] || "";
+             }
+          }
+            
+            function getRandomQuestionIndex() {
+            
+                let questionIndex = Math.floor(Math.random()* questionTableau.length);
+                
+while (questionPoser.includes(questionIndex)) {
+                    questionIndex = Math.floor(Math.random()* questionTableau.length)
+                    
+                }
+                questionPoser.push(questionIndex)
+                return questionIndex;
+            }
+            
+            
+            function reponse(reponseIndex) {
+                let questionData = questionTableau[debutPremiereQuestion];
+                if(reponseIndex === questionData.correction ) { 
+                    score++ 
+                  text.innerHTML=`<p>Vous avez trouver félicitations !\n \n la réponse était  <strong>${questionData.result[questionData.correction]}</strong></p>`
+                  text.showModal();
+                  cache();
+                  
+        localStorage.setItem("scoreNiveau4",score)
+      scoreElement.innerHTML="Score : "+ score;
+      nouvelleQuestion();
+                    
+                }else {
+                text.innerHTML="votre réponse est incorrect ! "
+                text.showModal();
+                cache();
+                 score--
+             scoreElement.innerHTML="Score : "+ score;
+                   
+                    localStorage.setItem("scoreNiveau4",score)
+                }
+            }
+            
+            function recommencer() {
+                debutPremiereQuestion = 0;
+                questionPoser = [];
+                score= 0
+      scoreElement.innerHTML= "Score: "+ score;
+                    localStorage.setItem("scoreNiveau4",score)
+                    
+                nouvelleQuestion();
+            }
+            nouvelleQuestion();
+            
+      
+            
+         
+        </script>
+        
+        
+        
+        
+        
+        
+    </body>
+</html>

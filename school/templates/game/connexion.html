@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width,initial-scale=1.0">
+<title>connect your account school game </title>
+<style>
+* {
+  color: black;
+}
+  body {
+  text-align: center;
+  padding: 50px;
+  background-image: linear-gradient(to right, #40f5ff,#2bc0ff,#80acff,#aafff4c5);
+  border-radius: 20px 20px;
+  font-size: 16px;
+  font-family: Georgia, serif;
+  box-shadow: 0 2px 4px rgba(0,0,0.3);
+  animation-name: moi;
+  animation-duration: 3s;
+  color: black;
+  border: none;
+  }
+
+  .button{
+  background-color: #2ad7ff;
+  left: 20px;
+  width: 80%;
+  border-radius: 20px 20px;
+  border: 1px solid #7fffff;
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-family: Georgia, serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.8);
+  margin-bottom: 1em;
+  }
+
+  input {
+  
+  padding: 15px;
+  border-radius: 18px 18px;
+  margin-bottom: 2em;
+  border: 1px solid #158cff;
+  background-color: #d5dfff;
+  text-align: left;
+  padding-left: 20px;
+  font-family: monospace,Sans-Serif;
+  color: black;
+  width: 50%;
+  }
+  input:focus {
+  border: 1px solid #dafa;
+  outline: none;
+  }
+  .button:active{
+  background-color: #def;
+  }
+  h1 {
+  color: black;
+  text-align: center;
+  margin-bottom: 2em;
+  letter-spacing: 1px;
+  }
+  .dialog {
+  width: 50%;
+  background: #c0fbfb;
+  border-radius: 10px 10px;
+  text-align: center;
+  border: none;
+  }
+  .dialog-h1 {
+  font-size: 18px;
+  color: rgba(0,0,0,0.8);
+  font-weight: bold;
+
+  }
+ .finish {
+   border-radius: 10px 10px;
+   border: none;
+   width: 50%;
+ }
+ .finish strong {
+   border: none;
+   margin: 10px;
+   padding: 10px;
+   box-sizing: border-box;
+   text-transform: uppercase;
+ }
+ dialog::backdrop {
+   backdrop-filter: blur(4px);
+ }
+ .inscrire {
+   background: none;
+   border: none;
+   color: black;
+ }
+ .inscrire:hover {
+   text-decoration: underline;
+   color: blue;
+ }
+</style>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %} 
+<h1>CONNEXION</h1>
+<input type="text" id="joueur" placeholder="Nom du joueur" name="nom" required>
+<input type="password" id="password" placeholder="Mot de passe" name="password" requirrd>
+<button type="submit" class="button">continuer</button><br>
+<a class="inscrire" href="{% url 'inscription' %}">S'inscrire</a>
+
+  {% if message %}
+   <p style="color: red; font-size: 12px;"> {{ message }} </p>
+   {% endif %}
+   
+</form>
+</body>
+</html>
+

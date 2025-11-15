@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width,initial-scale=1.0">
+  <title>Débutant 18</title>
+  <style>
+    body{
+    font-family: Georgia, serif;
+    text-align: center;
+    background-color: #d5f6ff;
+
+    }
+    button {
+    background-color: #d2d2fb;
+    border-radius: 20px 20px;
+    padding: 15px;
+    border: 1px solid cyan;
+    width: 70%;
+    margin-bottom: 1em;
+    color: black;
+    font-family: Georgia, serif;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.8);
+    }
+
+
+    div {
+    border-radius: 10px 10px;
+
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    animation-duration: 3s;
+    animation-name: junior;
+    }
+    @keyframes junior{
+    from{
+    transform: scaleX(0);
+    opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+    }
+
+    h1 {
+    font-size: 22px;
+    padding: 8px;
+    color: black;
+    }
+    p {
+    color: black;
+    }
+    dialog{
+
+    border-radius: 10px 10px;
+    background: #b7fafa;
+    border: none;
+    width: 60%;
+    }
+
+    .dialog::backdrop {
+    background: rgba(0,0,0,0.3);
+    }
+    .dialog p {
+    white-space: pre-line;
+    color: blue;
+    }
+    .dialog button {
+    width: 100%;
+    }
+    .dialog h1 {
+    font-size: 30px;
+    color: black;
+    }
+    .text {
+    width: 50%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="reponses">
+    <br><br><br>
+    <h1 id="quiz">qui es-tu ?</h1>
+    <br><br><br>
+
+    <button id="btn0" onclick="reponse(0)"></button>
+    <button id="btn1" onclick="reponse(1)"></button>
+    <button id="btn2" onclick="reponse(2)"></button>
+    <button id="btn3" onclick="reponse(3)"></button>
+    <p id="score">
+      Points : 0
+    </p>
+    <br>
+  </div>
+
+
+  <dialog class="dialog" id="dialog">
+    <h1 class="dialog-h1">VICTOIRE  🎉</h1>
+    <button onclick="suivant()">SUIVANT</button>
+    <button onclick="profil()">PROFIL</button>
+  </dialog>
+  <dialog class="text" id="text">
+
+  </dialog>
+
+  <script>
+    let dialog = document.getElementById("dialog")
+    let text = document.getElementById("text")
+    setTimeout(function () {
+    text.innerHTML = `<p>BIENVENUE AU \n NIVEAU 18</p>`
+    text.showModal()
+    }, 2500)
+    setTimeout(function () {
+    text.close()
+    }, 4000)
+
+    function cache() {
+    setTimeout(function () {
+    text.close();
+    }, 1000)
+    }
+
+
+    let questionTableau = [
+    {
+    "questions": "Quelle est la planète la plus grosse du système solaire ?",
+    "result": ["Saturne", "Jupiter", "Uranus", "Neptune"],
+    "correction": 0
+    },
+    {
+    "questions": "En quelle année est tombé le mur de Berlin ?",
+    "result": ["1990", "1987", "1989", "1991"],
+    "correction": 3
+    },
+    {
+    "questions": "Combien y a-t-il de zéros dans un milliard ?",
+    "result": ["6", "9", "12", "10"],
+    "correction": 1
+    },
+    {
+    "questions": "Quelle est la plus haute montagne du monde ?",
+    "result": ["Everest", "K2", "Kilimandjaro", "Annapurna"],
+    "correction": 2
+    },
+    {
+    "questions": "Quel est le plus petit pays du monde ?",
+    "result": ["Vatican", "Monaco", "Malte", "Liechtenstein"],
+    "correction": 0
+    },
+    {
+    "questions": "Qui a écrit 'Le Petit Prince' ?",
+    "result": ["Exupéry", "Molière", "Camus", "Hugo"],
+    "correction": 3
+    },
+    {
+    "questions": "Combien d’os contient le corps humain adulte ?",
+    "result": ["206", "210", "196", "180"],
+    "correction": 1
+    },
+    {
+    "questions": "Quelle est la capitale de l’Égypte ?",
+    "result": ["Le Caire", "Alexandrie", "Luxor", "Gizeh"],
+    "correction": 2
+    },
+    {
+    "questions": "Quel gaz les plantes absorbent-elles pour produire de l’oxygène ?",
+    "result": ["CO₂", "O₂", "H₂", "N₂"],
+    "correction": 0
+    },
+    {
+    "questions": "Qui a inventé l’ampoule électrique ?",
+    "result": ["Tesla", "Edison", "Franklin", "Bell"],
+    "correction": 3
+    }
+    ]
+
+     function suivant() {
+    window.location.href = "/debutant19/"
+    }
+    function profil() {
+    window.location.href = "/profil/"
+    }
+    
+    let debutPremiereQuestion = 0;
+    let questionPoser = [];
+
+    let divElement = document.getElementById("reponses");
+
+    let scoreElement = document.getElementById("score");
+
+    let questionElement = document.getElementById("quiz");
+    let score = parseInt(localStorage.getItem("scoreNiveau18")) || 0;
+    scoreElement.innerText = "Score : " + score;
+    let reponseButton = [
+    document.getElementById("btn0"),
+    document.getElementById("btn1"),
+    document.getElementById("btn2"),
+    document.getElementById("btn3"),
+    ];
+
+
+    function nouvelleQuestion() {
+
+    if (questionPoser.length === questionTableau.length) {
+    let i = 0;
+    i++
+    text.innerHTML = `<p>Félicitation niveau  18 terminé ! \n score final : ${score} </p>`
+    text.showModal();
+    localStorage.setItem("scoreNiveau18", score);
+    divElement.innerHTML = "";
+
+    setTimeout(function () {
+    text.innerHTML = "Félicitation niveau suivant ! 💐"
+    text.showModal();
+    dialog.showModal()
+    }, 100)
+    return;
+    }
+
+    let questionIndex = getRandomQuestionIndex();
+    debutPremiereQuestion = questionIndex;
+    let questionData = questionTableau[debutPremiereQuestion]
+    questionElement.innerText = questionData.questions;
+
+
+
+    for (let i = 0; i < reponseButton.length; i++ ){
+
+    reponseButton[i].innerText = i+ ": " + questionData.result[i] || "";
+    }
+    }
+
+    function getRandomQuestionIndex() {
+
+    let questionIndex = Math.floor(Math.random()* questionTableau.length);
+
+    while (questionPoser.includes(questionIndex)) {
+    questionIndex = Math.floor(Math.random()* questionTableau.length)
+
+    }
+    questionPoser.push(questionIndex)
+    return questionIndex;
+    }
+
+
+    function reponse(reponseIndex) {
+    let questionData = questionTableau[debutPremiereQuestion];
+    if (reponseIndex === questionData.correction ) {
+    score++
+    text.innerHTML = `<p>
+    Vous avez trouver félicitations !\n \n la réponse était  <strong>
+    ${questionData.result[questionData.correction]}
+    </strong>
+    </p>`
+    text.showModal();
+    cache();
+    scoreElement.innerHTML = "Score: "+ score;
+    localStorage.setItem("scoreNiveau18", score); nouvelleQuestion();
+
+    } else {
+   text.innerHTML = "votre réponse est incorrect ! ";
+    text.showModal();
+    cache();
+    score--
+    scoreElement.innerHTML = "Score : "+ score;
+    localStorage.setItem("scoreNiveau18", score);
+    }
+    }
+
+    function recommencer() {
+    debutPremiereQuestion = 0;
+    score = 0;
+    questionPoser = [];
+    scoreElement.innerHTML = "Score: "+ score;
+    localStorage.setItem("scoreNiveau18", score);
+    nouvelleQuestion();
+    }
+    nouvelleQuestion();
+
+  </script>
+
+</body>
+</html>
