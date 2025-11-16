@@ -24,9 +24,21 @@ SECRET_KEY = 'django-insecure-&z=thx$=cbtk+&9^kq%!o0n2d@wxiq@csjjwwap)$z%77%=wbr
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
 
+# CSRF pour Railway
+CSRF_TRUSTED_ORIGINS = [
+    'https://game-school-production.up.railway.app',
+    'https://*.railway.app',
+    'https://*.up.railway.app'
+]
 
+# Hosts autorisés
+ALLOWED_HOSTS = [
+    'game-school-production.up.railway.app', 
+    '.railway.app',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Application definition
 
