@@ -1,0 +1,10 @@
+
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "gunicorn school.wsgi:application",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
