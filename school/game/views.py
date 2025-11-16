@@ -7,7 +7,8 @@ from django.http import JsonResponse
 def index(request):
     return render(request,"game/index.html")
 
-@crsf_exempt
+@csrf_exempt
+
 def inscription(request):
     if request.method == "POST":
         form = Formulaire(request.POST,request.FILES)
@@ -30,7 +31,7 @@ def save_score(request):
       
         return JsonResponse({"message":"Score mise a jour"})
     return JsonResponse({"error":"Methode non autoriser frere"},status=400)
-@crsf_exempt
+@csrf_exempt
 def connexion(request):
     message = ""
     if request.method == "POST":
