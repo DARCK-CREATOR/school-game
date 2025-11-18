@@ -1,1 +1,2 @@
-web: cd school &&  gunicorn school.wsgi --log-file -
+web: gunicorn school.wsgi --log-file -
+
