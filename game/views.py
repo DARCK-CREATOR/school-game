@@ -8,18 +8,22 @@ def index(request):
     return render(request,"game/index.html")
 
 @csrf_exempt
-
 def inscription(request):
-    if request.method == "POST":
-        form = Formulaire(request.POST,request.FILES)
-        
-        if form.is_valid():
-            perso =form.save()
-            return redirect("profil",id=perso.id)
-    else:
-        form = Formulaire()
-    return render(request,"game/inscription.html",{"form":form})
-    
+    try:
+        if request.method == "POST":
+            form = Formulaire(request.POST, request.FILES)
+            if form.is_valid():
+                perso = form.save()
+                return redirect("profil", id=perso.id)
+        else:
+            form = Formulaire()
+        return render(request, "game/inscription.html", {"form": form})
+    except Exception as e:
+        return render(request, "game/inscription.html", {
+            "form": Formulaire(),
+            "error": "Erreur lors de l'inscription"
+        })
+
 @csrf_exempt
 def save_score(request):
     if request.method=="POST":
