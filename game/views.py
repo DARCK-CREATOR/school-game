@@ -11,7 +11,8 @@ def index(request):
 def inscription(request):
     try:
         if request.method == "POST":
-            form = Formulaire(request.POST, request.FILES)
+            form = Formulaire(request.POST)
+            
             if form.is_valid():
                 perso = form.save()
                 return redirect("profil", id=perso.id)
